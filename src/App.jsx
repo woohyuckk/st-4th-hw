@@ -1,4 +1,4 @@
-import React from "react";
+
 import BoxContainer from "./components/BoxContainer";
 import GlobalStyle from "../GlobalStyle";
 
