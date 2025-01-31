@@ -8,17 +8,31 @@ const Container = styled.div`
 `;
 
 function BoxContainer() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndexList, setActiveIndexList] = useState([]);
 
   const handleClick = (index) => {
-    setActiveIndex(index);
+    if (activeIndexList.some((element) => element === index)) {
+      const filtredActiveIndexList = activeIndexList.filter(
+        (number) => number !== index
+      );
+      setActiveIndexList(filtredActiveIndexList);
+    } else {
+      setActiveIndexList([...activeIndexList, index]);
+    }
   };
 
   return (
     <Container>
       {/* TODO: active prop 을 어떻게 해야 클릭한 박스임을 알수있을 지 active prop에 할당할 값을 수정해보세요. */}
-      {[0, 1, 2, 3, 4].map((index) => (
-        <Box key={index} active={false} onClick={() => handleClick(index)} />
+      {Array.from({ length: 5 }, (_, index) => index).map((index) => (
+        <Box
+          key={index}
+          active={activeIndexList.includes(index)}
+          onClick={() => handleClick(index)}
+        >
+          {" "}
+          {index}
+        </Box>
       ))}
     </Container>
   );
