@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
@@ -21,7 +21,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail" element={<Detail />} >
+          <Route index element={<Navigate to="1" replace />} />
+          <Route path=":id" element={<Detail/>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
